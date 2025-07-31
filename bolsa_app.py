@@ -55,7 +55,13 @@ def calcular_dinero_total(anios, cantidad_inicial, ingresos_anuales, rentabilida
 
 
 # === INTERFAZ WEB ===
-st.title("📊 Simulador de Inversión Monte Carlo")
+st.markdown("""
+    <h1 style='text-align: center; font-size: 3em; font-weight: 600; margin-top: 0.5em; color: #2c3e50;'>
+        Simulador de Inversión Monte Carlo
+    </h1>
+    <hr style='border: none; height: 2px; background-color: #ddd;'/>
+""", unsafe_allow_html=True)
+
 
 num_escenarios = st.slider("¿Cuántos escenarios quieres comparar?", 1, 3, 1)
 seed = st.number_input("Semilla aleatoria (fija para comparar resultados):", value=np.random.randint(0, 100000))
