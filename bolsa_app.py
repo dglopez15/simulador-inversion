@@ -2,6 +2,8 @@ import streamlit as st
 import numpy as np
 import matplotlib.pyplot as plt
 
+nivel_aleatoriedad = st.slider("Nivel de aleatoriedad (1 = baja, 10 = alta)", 1, 10, 5)
+
 # Función para elegir activo
 def elegir_activo(key_suffix=""):
     activos = {
@@ -30,14 +32,14 @@ def elegir_activo(key_suffix=""):
 
 
 # Simulación
-def calcular_dinero_total(anios, cantidad_inicial, ingresos_anuales, rentabilidad_media, varianza, seed):
+def calcular_dinero_total(anios, cantidad_inicial, ingresos_anuales, rentabilidad_media, varianza, seed, nivel_aleatoriedad):
     np.random.seed(seed)
     meses = anios * 12
     saldo = [cantidad_inicial]
     deposito_total = [cantidad_inicial]
 
     mu_mensual = rentabilidad_media / 12
-    sigma_mensual = np.sqrt(varianza) / np.sqrt(12)
+    sigma_mensual = np.sqrt(varianza) / np.sqrt(12) * (nivel_aleatoriedad / 5)  # Escala de 1 a 10 (5 = normal)
 
     for mes in range(1, meses + 1):
         anio_actual = (mes - 1) // 12
@@ -50,6 +52,7 @@ def calcular_dinero_total(anios, cantidad_inicial, ingresos_anuales, rentabilida
         deposito_total.append(deposito_total[-1] + ingreso_mensual)
 
     return saldo, deposito_total
+
 
 # === INTERFAZ WEB ===
 st.title("📊 Simulador de Inversión Monte Carlo")
