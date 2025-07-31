@@ -102,7 +102,7 @@ st.markdown("""
 # Título moderno y centrado
 st.markdown("""
     <h1 style='font-weight: 600; margin-top: 0.5em; color: #5dade2;'>
-        SIMULADOR DE INVERSIÓN
+        Simulador de Inversión
     </h1>
     <hr style='border: none; height: 2px; background-color: #d6eaf8;'/>
 """, unsafe_allow_html=True)
