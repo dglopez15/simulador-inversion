@@ -87,7 +87,7 @@ if resultados:
     st.subheader("📈 Evolución del Capital")
 
     meses = np.arange(0, max_anios * 12 + 1)
-    fig, ax = plt.subplots(figsize=(12, 5))
+    fig, ax = plt.subplots(figsize=(20, 10))
     for saldo, deposito_total, nombre_activo, etiqueta in resultados:
         linea_principal, = ax.plot(meses, saldo, label=f"{etiqueta} ({nombre_activo})")
         ax.plot(meses, deposito_total, linestyle=":", color=linea_principal.get_color(), alpha=0.4)
