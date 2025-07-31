@@ -122,8 +122,8 @@ if resultados:
     st.subheader("📈 Evolución del Capital")
 
     meses = np.arange(0, max_anios * 12 + 1)
-    fig, ax = plt.subplots(figsize=(12, 6), facecolor='none')  # Fondo figura transparente
-    ax.set_facecolor("none")  # Fondo área del gráfico transparente
+    fig, ax = plt.subplots(figsize=(12, 6), facecolor='none')  # fondo figura
+    ax.set_facecolor("none")  # fondo área del gráfico
 
     for saldo, deposito_total, nombre_activo, etiqueta in resultados:
         linea_principal, = ax.plot(
@@ -139,12 +139,26 @@ if resultados:
             linewidth=2
         )
 
+    # Estilo visual limpio
+    ax.grid(False)
     ax.set_xlabel("Meses")
     ax.set_ylabel("Capital (€)")
-    ax.grid(False)
+
+    # Colores blancos en ejes
+    ax.spines['bottom'].set_color('white')
+    ax.spines['left'].set_color('white')
+    ax.tick_params(axis='x', colors='white')
+    ax.tick_params(axis='y', colors='white')
+    ax.yaxis.label.set_color('white')
+    ax.xaxis.label.set_color('white')
+
+    # Eliminar marco superior y derecho
+    ax.spines['top'].set_visible(False)
+    ax.spines['right'].set_visible(False)
+
+    # Leyenda
     ax.legend()
     st.pyplot(fig)
-
 # === RESULTADOS ===
 st.subheader("📋 Resultados Finales")
 for saldo, deposito_total, nombre_activo, etiqueta in resultados:
