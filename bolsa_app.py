@@ -122,8 +122,8 @@ if resultados:
     st.subheader("📈 Evolución del Capital")
 
     meses = np.arange(0, max_anios * 12 + 1)
-    fig, ax = plt.subplots(figsize=(12, 6), facecolor='none')  # fondo figura
-    ax.set_facecolor("none")  # fondo área del gráfico
+    fig, ax = plt.subplots(figsize=(12, 6), facecolor='none')  # Fondo figura transparente
+    ax.set_facecolor("none")  # Fondo área del gráfico transparente
 
     for saldo, deposito_total, nombre_activo, etiqueta in resultados:
         linea_principal, = ax.plot(
@@ -139,12 +139,11 @@ if resultados:
             linewidth=2
         )
 
-    # Estilo visual limpio
-    ax.grid(False)
     ax.set_xlabel("Meses")
     ax.set_ylabel("Capital (€)")
+    ax.grid(False)
 
-    # Colores blancos en ejes
+    # Colores blancos en los ejes
     ax.spines['bottom'].set_color('white')
     ax.spines['left'].set_color('white')
     ax.tick_params(axis='x', colors='white')
@@ -156,9 +155,14 @@ if resultados:
     ax.spines['top'].set_visible(False)
     ax.spines['right'].set_visible(False)
 
-    # Leyenda
-    ax.legend()
+    # Leyenda fondo transparente y texto blanco
+    leg = ax.legend()
+    leg.get_frame().set_alpha(0)  # Fondo transparente
+    for text in leg.get_texts():
+        text.set_color("white")
+
     st.pyplot(fig)
+
 # === RESULTADOS ===
 st.subheader("📋 Resultados Finales")
 for saldo, deposito_total, nombre_activo, etiqueta in resultados:
@@ -166,3 +170,4 @@ for saldo, deposito_total, nombre_activo, etiqueta in resultados:
     st.write(f"Total depositado: {deposito_total[-1]:,.2f} €")
     st.write(f"Capital final simulado: {saldo[-1]:,.2f} €")
     st.write(f"Ganancia neta simulada: {saldo[-1] - deposito_total[-1]:,.2f} €")
+
