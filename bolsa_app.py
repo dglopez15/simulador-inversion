@@ -125,7 +125,7 @@ for i in range(1, num_escenarios + 1):
     for j in range(bloques):
         inicio = j * 5 + 1
         fin = min((j + 1) * 5, anios)
-        ingreso = st.number_input(f"Ingreso mensual de años {inicio}-{fin} (€)", value=300.0, key=f"ing_{i}_{j}")
+        ingreso = st.number_input(f"Ingreso mensual de años {inicio}-{fin} (€)", value=100.0, key=f"ing_{i}_{j}")
         ingresos_anuales.extend([ingreso] * (fin - inicio + 1))
 
     (media, varianza), nombre_activo = elegir_activo(key_suffix=i)
