@@ -100,8 +100,8 @@ max_anios = 0
 
 for i in range(1, num_escenarios + 1):
     st.header(f"Escenario {i}")
-    anios = st.number_input(f"Años de inversión (Escenario {i})", min_value=1, max_value=50, value=20, key=f"a_{i}")
-    cantidad_inicial = st.number_input(f"Capital inicial (€)", min_value=0.0, value=10000.0, key=f"c_{i}")
+    anios = st.number_input(f"Años de inversión)", min_value=1, max_value=50, value=20, key=f"a_{i}")
+    cantidad_inicial = st.number_input(f"Capital inicial (€)", min_value=0.0, value=100.0, key=f"c_{i}")
 
     ingresos_anuales = []
     bloques = (anios + 4) // 5
@@ -124,11 +124,11 @@ if resultados:
     meses = np.arange(0, max_anios * 12 + 1)
     fig, ax = plt.subplots(figsize=(20, 10))
     for saldo, deposito_total, nombre_activo, etiqueta in resultados:
-        linea_principal, = ax.plot(meses, saldo, label=f"{etiqueta} ({nombre_activo})")
-        ax.plot(meses, deposito_total, linestyle=":", color=linea_principal.get_color(), alpha=0.4)
+        linea_principal, = ax.plot(meses, saldo, label=f"{etiqueta} ({nombre_activo})", linewidth=2.5)
+        ax.plot(meses, deposito_total, linestyle=":", color=linea_principal.get_color(), alpha=0.4, linewidth=2)
     ax.set_xlabel("Meses")
     ax.set_ylabel("Capital (€)")
-    ax.grid(True)
+    ax.grid(False)
     ax.legend()
     st.pyplot(fig)
 
