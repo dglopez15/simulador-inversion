@@ -56,26 +56,31 @@ def calcular_dinero_total(anios, cantidad_inicial, ingresos_anuales, rentabilida
 # Estilo para diseño responsivo
 st.markdown("""
     <style>
-        /* Contenedor principal más fluido */
+        /* Estilo adaptativo: ancho fluido con margen razonable */
         .main .block-container {
-            padding-left: 1rem;
-            padding-right: 1rem;
+            max-width: 1600px;
+            padding-left: 3rem;
+            padding-right: 3rem;
         }
 
-        /* Título adaptativo */
+        @media (max-width: 768px) {
+            .main .block-container {
+                padding-left: 1rem;
+                padding-right: 1rem;
+            }
+
+            h1 {
+                font-size: 1.6em !important;
+            }
+        }
+
         h1 {
             text-align: center;
-            font-size: 2.2em;
-        }
-
-        /* Gráfico adaptativo en móviles */
-        @media screen and (max-width: 768px) {
-            h1 {
-                font-size: 1.5em;
-            }
+            font-size: 2.8em;
         }
     </style>
 """, unsafe_allow_html=True)
+
 
 # Título moderno y centrado
 st.markdown("""
