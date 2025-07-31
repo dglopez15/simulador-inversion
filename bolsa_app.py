@@ -78,7 +78,7 @@ for i in range(1, num_escenarios + 1):
 
     (media, varianza), nombre_activo = elegir_activo(key_suffix=i)
 
-    saldo, deposito_total = calcular_dinero_total(anios, cantidad_inicial, ingresos_anuales, media, varianza, seed)
+    saldo, deposito_total = calcular_dinero_total(anios, cantidad_inicial, ingresos_anuales, media, varianza, seed, nivel_aleatoriedad)
     resultados.append((saldo, deposito_total, nombre_activo, f"Escenario {i}"))
     max_anios = max(max_anios, anios)
 
