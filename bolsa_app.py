@@ -54,6 +54,23 @@ def calcular_dinero_total(anios, cantidad_inicial, ingresos_anuales, rentabilida
 
 # === INTERFAZ WEB ===
 # Estilo para diseño responsivo
+st.markdown(
+    """
+    <style>
+    /* Fuente para todo el body */
+    html, body, [class*="css"]  {
+        font-family: 'Futura', sans-serif !important;
+    }
+    /* Opcional: para los sliders y selectbox */
+    .stSlider > div > div > div > div, 
+    .stSelectbox > div > div > div > div {
+        font-family: 'Futura', sans-serif !important;
+    }
+    </style>
+    """, 
+    unsafe_allow_html=True
+)
+
 st.markdown("""
     <style>
         /* Estilo adaptativo: ancho fluido con margen razonable */
@@ -85,7 +102,7 @@ st.markdown("""
 # Título moderno y centrado
 st.markdown("""
     <h1 style='font-weight: 600; margin-top: 0.5em; color: #5dade2;'>
-        Simulador de Inversión Monte Carlo
+        SIMULADOR DE INVERSIÓN
     </h1>
     <hr style='border: none; height: 2px; background-color: #d6eaf8;'/>
 """, unsafe_allow_html=True)
