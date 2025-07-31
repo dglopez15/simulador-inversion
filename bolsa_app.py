@@ -2,8 +2,6 @@ import streamlit as st
 import numpy as np
 import matplotlib.pyplot as plt
 
-nivel_aleatoriedad = st.slider("Nivel de aleatoriedad (1 = baja, 10 = alta)", 1, 10, 5)
-
 # Función para elegir activo
 def elegir_activo(key_suffix=""):
     activos = {
@@ -55,13 +53,39 @@ def calcular_dinero_total(anios, cantidad_inicial, ingresos_anuales, rentabilida
 
 
 # === INTERFAZ WEB ===
+# Estilo para diseño responsivo
 st.markdown("""
-    <h1 style='text-align: center; font-size: 3em; font-weight: 600; margin-top: 0.5em; color: #2c3e50;'>
-        Simulador de Inversión Monte Carlo
-    </h1>
-    <hr style='border: none; height: 2px; background-color: #ddd;'/>
+    <style>
+        /* Contenedor principal más fluido */
+        .main .block-container {
+            padding-left: 1rem;
+            padding-right: 1rem;
+        }
+
+        /* Título adaptativo */
+        h1 {
+            text-align: center;
+            font-size: 2.2em;
+        }
+
+        /* Gráfico adaptativo en móviles */
+        @media screen and (max-width: 768px) {
+            h1 {
+                font-size: 1.5em;
+            }
+        }
+    </style>
 """, unsafe_allow_html=True)
 
+# Título moderno y centrado
+st.markdown("""
+    <h1 style='font-weight: 600; margin-top: 0.5em; color: #5dade2;'>
+        Simulador de Inversión Monte Carlo
+    </h1>
+    <hr style='border: none; height: 2px; background-color: #d6eaf8;'/>
+""", unsafe_allow_html=True)
+
+nivel_aleatoriedad = st.slider("Nivel de aleatoriedad (1 = baja, 10 = alta)", 1, 10, 5)
 
 num_escenarios = st.slider("¿Cuántos escenarios quieres comparar?", 1, 3, 1)
 seed = st.number_input("Semilla aleatoria (fija para comparar resultados):", value=np.random.randint(0, 100000))
