@@ -28,7 +28,6 @@ def elegir_activo(key_suffix=""):
     nombre = st.selectbox("Selecciona un activo:", list(activos.keys()), key=f"activo_select_{key_suffix}")
     return activos[nombre], nombre
 
-
 # Simulación
 def calcular_dinero_total(anios, cantidad_inicial, ingresos_anuales, rentabilidad_media, varianza, seed, nivel_aleatoriedad):
     np.random.seed(seed)
@@ -37,7 +36,7 @@ def calcular_dinero_total(anios, cantidad_inicial, ingresos_anuales, rentabilida
     deposito_total = [cantidad_inicial]
 
     mu_mensual = rentabilidad_media / 12
-    sigma_mensual = np.sqrt(varianza) / np.sqrt(12) * (nivel_aleatoriedad / 5)  # Escala de 1 a 10 (5 = normal)
+    sigma_mensual = np.sqrt(varianza) / np.sqrt(12) * (nivel_aleatoriedad / 5)  # Escala 1-10
 
     for mes in range(1, meses + 1):
         anio_actual = (mes - 1) // 12
@@ -51,17 +50,14 @@ def calcular_dinero_total(anios, cantidad_inicial, ingresos_anuales, rentabilida
 
     return saldo, deposito_total
 
-
 # === INTERFAZ WEB ===
-# Estilo para diseño responsivo
+# Estilo
 st.markdown(
     """
     <style>
-    /* Fuente para todo el body */
     html, body, [class*="css"]  {
         font-family: 'Futura', sans-serif !important;
     }
-    /* Opcional: para los sliders y selectbox */
     .stSlider > div > div > div > div, 
     .stSelectbox > div > div > div > div {
         font-family: 'Futura', sans-serif !important;
@@ -73,7 +69,6 @@ st.markdown(
 
 st.markdown("""
     <style>
-        /* Estilo adaptativo: ancho fluido con margen razonable */
         .main .block-container {
             max-width: 1600px;
             padding-left: 3rem;
@@ -98,8 +93,7 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
-
-# Título moderno y centrado
+# Título
 st.markdown("""
     <h1 style='font-weight: 600; margin-top: 0.5em; color: #5dade2;'>
         Simulador de Inversión
@@ -108,7 +102,6 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 nivel_aleatoriedad = st.slider("Nivel de aleatoriedad (1 = baja, 10 = alta)", 1, 10, 5)
-
 num_escenarios = st.slider("¿Cuántos escenarios quieres comparar?", 1, 3, 1)
 seed = st.number_input("Semilla aleatoria (fija para comparar resultados):", value=np.random.randint(0, 100000))
 
@@ -117,7 +110,7 @@ max_anios = 0
 
 for i in range(1, num_escenarios + 1):
     st.header(f"Escenario {i}")
-    anios = st.number_input(f"Años de inversión)", min_value=1, max_value=50, value=20, key=f"a_{i}")
+    anios = st.number_input(f"Años de inversión", min_value=1, max_value=50, value=20, key=f"a_{i}")
     cantidad_inicial = st.number_input(f"Capital inicial (€)", min_value=0.0, value=100.0, key=f"c_{i}")
 
     ingresos_anuales = []
@@ -139,8 +132,8 @@ if resultados:
     st.subheader("📈 Evolución del Capital")
 
     meses = np.arange(0, max_anios * 12 + 1)
-    fig, ax = plt.subplots(figsize=(12, 6), facecolor='none')  # Fondo figura transparente
-    ax.set_facecolor("none")  # Fondo área del gráfico transparente
+    fig, ax = plt.subplots(figsize=(12, 12), facecolor='none')  # Alto doble
+    ax.set_facecolor("none")
 
     for saldo, deposito_total, nombre_activo, etiqueta in resultados:
         linea_principal, = ax.plot(
@@ -172,13 +165,14 @@ if resultados:
     ax.spines['top'].set_visible(False)
     ax.spines['right'].set_visible(False)
 
-    # Leyenda fondo transparente y texto blanco
+    # Leyenda
     leg = ax.legend()
-    leg.get_frame().set_alpha(0)  # Fondo transparente
+    leg.get_frame().set_alpha(0)
     for text in leg.get_texts():
         text.set_color("white")
 
-    st.pyplot(fig)
+    # Mostrar gráfico y limpiar figura para que el "ampliar" muestre la versión actual
+    st.pyplot(fig, clear_figure=True)
 
 # === RESULTADOS ===
 st.subheader("📋 Resultados Finales")
